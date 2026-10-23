@@ -68,6 +68,9 @@ python evals/sprint4/metricas.py
 
 No Windows, prefixe com `PYTHONIOENCODING=utf-8`.
 
+**No Colab:** `sprint4_colab.ipynb` roda a mesma sequência, com as três chaves
+nos Secrets do Colab, e no fim baixa um zip com `results/`.
+
 ## Arquivos
 
 | Arquivo | Papel |
