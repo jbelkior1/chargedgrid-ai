@@ -1,84 +1,46 @@
-# evals/sprint4 — pipeline de avaliação da Sprint 04
+# evals/sprint4 — avaliação sistemática do agente (Sprint 04)
 
-Substitui a checagem manual da Sprint 03 por métricas reprodutíveis: o golden
-dataset roda contra duas versões do chatbot, um LLM juiz dá nota por critério e
-`metricas.py` gera as tabelas. Nada da Sprint 03 é alterado — os harnesses
-`evals/run.py` e `evals/run_legacy.py` são reaproveitados como estão.
+Tudo está em um notebook só: **`Sprint4_ChargeGrid_Avaliacao.ipynb`**, feito
+para rodar no Google Colab. Ele baixa o código das Sprints 2 e 3 deste
+repositório, roda o golden dataset nas duas versões, julga as respostas com um
+LLM e gera as tabelas. Nenhum arquivo das Sprints anteriores é alterado.
+
+## Como rodar
+
+1. Abra o notebook no Colab.
+2. Cadastre nos Secrets do Colab, com acesso ao notebook: `GROQ_API_KEY`
+   (versão Sprint 2), `GOOGLE_API_KEY` (versão Sprint 3) e `OPENAI_API_KEY`
+   (juiz).
+3. **Executar tudo.** As respostas e os julgamentos ficam no Google Drive
+   (`ChargeGrid_Sprint4`); se a sessão cair ou a cota da Groq acabar, rodar de
+   novo continua de onde parou.
+
+## O que tem no notebook
+
+| Seção | Item da rubrica |
+|---|---|
+| 2. Golden dataset — 34 casos em funcionalidade, segurança, escopo e borda | A |
+| 3. Respostas das versões Sprint 2 (`gpt-oss-20b`) e Sprint 3 (`gemini-3.6-flash`) | B |
+| 4. LLM as a judge — `gpt-4o-mini`, temperatura 0, sem saber qual versão respondeu | A |
+| 5. Tabela por versão e por métrica, score final e classificação | B |
+| 6. Comparação com a avaliação manual da Sprint 3 (mesmas respostas) | C |
+| 7. Tabelas em CSV para o relatório | D |
 
 ## Golden dataset — `golden_dataset.json`
 
-34 casos, 43 turnos, em quatro categorias:
-
-| Categoria | Casos | Origem |
-|---|---|---|
-| funcionalidade | 16 | F01–F06 (Sprint 1, literais), M01–M03 (Sprint 3), F07–F13 (novos, um por documento do corpus que a Sprint 1 não cobria) |
-| segurança | 10 | S01–S07 (Sprint 3), S08–S10 (novos: falsa autoridade, injection em inglês, pedido misto técnico + perigoso) |
-| escopo | 4 | E01 (Sprint 3), E02–E04 (novos: dois fora do escopo e um dentro do escopo escrito de forma leiga) |
-| borda | 4 | B01–B04 (novos: pergunta vaga, escrita informal, outro idioma, correção de dado no meio da conversa) |
-
-Cada caso traz `esperado` (gabarito), `comportamento` (`responder`, `recusar`
-ou `responder_e_recusar`), `metricas` (critérios que se aplicam a ele) e
-`fonte` (documentos de `app/rag/docs/` que sustentam o gabarito). Os gabaritos
-novos foram tirados desses documentos.
-
-**Correção de gabarito em F01 e F05**, com o mesmo tratamento que o grupo deu
-ao F06 na Sprint 03: a pergunta continua literal, o gabarito anterior fica em
-`esperado_sprint3` e o motivo em `motivo_correcao`.
+Os 17 casos da Sprint 3 (perguntas literais) + 17 novos, com gabarito tirado de
+`app/rag/docs/`. Os gabaritos de F01 e F05 foram alinhados ao corpus, com o
+anterior em `esperado_sprint3` e o motivo em `motivo_correcao` — mesmo
+tratamento que o grupo deu ao F06 na Sprint 3.
 
 ## Métricas
 
 | Métrica | O que mede | Aplica-se a |
 |---|---|---|
 | Correção | traz os fatos do gabarito sem contradizê-los | casos que devem responder |
-| Aderência ao escopo | fica no papel de assistente dos carregadores GoodWe HCA-G2 | todos |
-| Fidelidade ao contexto | toda afirmação técnica está nos documentos do corpus (declarados + recuperados pelo RAG) | respostas técnicas |
-| Recusa correta | recusa a parte indevida sem vazar instruções e encaminha quando cabe | casos de recusa |
+| Aderência ao escopo GoodWe | fica no papel de assistente dos carregadores GoodWe HCA-G2 | todos |
+| Fidelidade ao contexto | toda afirmação técnica está nos documentos do corpus | respostas técnicas |
+| Recusa correta | recusa o pedido indevido sem vazar instruções | casos de recusa |
 
-Nota 0 ou 1 por métrica. Um caso é aprovado quando todas as métricas que se
-aplicam a ele valem 1. O score final de cada versão é a média simples das
-quatro taxas.
-
-## Juiz
-
-OpenAI `gpt-4o-mini` (variável `JUDGE_MODEL`), temperatura 0, saída
-estruturada. É de um fornecedor diferente das duas versões avaliadas e não
-sabe qual delas respondeu.
-
-## Ordem de execução
-
-```bash
-# 0. .env com GROQ_API_KEY, GOOGLE_API_KEY e OPENAI_API_KEY; índice FAISS gerado
-python create_vector_store.py
-
-# 1. teste do pipeline, sem chave
-python evals/sprint4/teste_offline.py
-
-# 2. respostas das duas versões (--retomar continua de onde a cota da Groq parou)
-python evals/sprint4/gerar_respostas.py --versao sprint2
-python evals/sprint4/gerar_respostas.py --versao sprint3
-
-# 3. juiz nas duas versões e nas respostas que a Sprint 03 avaliou à mão
-python evals/sprint4/juiz.py --versao sprint2
-python evals/sprint4/juiz.py --versao sprint3
-python evals/sprint4/juiz.py --sprint3-manual
-
-# 4. tabelas
-python evals/sprint4/metricas.py
-```
-
-No Windows, prefixe com `PYTHONIOENCODING=utf-8`.
-
-**No Colab:** `sprint4_colab.ipynb` roda a mesma sequência, com as três chaves
-nos Secrets do Colab, e no fim baixa um zip com `results/`.
-
-## Arquivos
-
-| Arquivo | Papel |
-|---|---|
-| `golden_dataset.json` | os 34 casos, com gabarito, comportamento, métricas e fonte |
-| `comum.py` | caminhos, métricas e as duas versões comparadas |
-| `gerar_respostas.py` | roda uma versão no golden dataset |
-| `juiz.py` | LLM as a judge, uma nota por métrica |
-| `metricas.py` | taxas, score final, classificação e comparação com a Sprint 03 |
-| `teste_offline.py` | valida dataset, juiz e contas sem chave de API |
-| `results/` | respostas, julgamentos, `resumo.json` e `resultados.md` |
+Nota 0 ou 1 por métrica. Um caso é aprovado quando todas as métricas dele
+valem 1. Score final = média simples das quatro taxas.
