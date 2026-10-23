@@ -11,9 +11,9 @@ LLM e gera as tabelas. Nenhum arquivo das Sprints anteriores é alterado.
 2. Cadastre nos Secrets do Colab, com acesso ao notebook: `GROQ_API_KEY`
    (versão Sprint 2), `GOOGLE_API_KEY` (versão Sprint 3) e `OPENAI_API_KEY`
    (juiz).
-3. **Executar tudo.** As respostas e os julgamentos ficam no Google Drive
-   (`ChargeGrid_Sprint4`); se a sessão cair ou a cota da Groq acabar, rodar de
-   novo continua de onde parou.
+3. **Executar tudo.** No fim, o notebook baixa `resultados_sprint4.zip` com o
+   golden dataset, as respostas, os julgamentos e as tabelas. Se a cota da Groq
+   acabar no meio, rodar a célula de novo continua dos casos que faltam.
 
 ## O que tem no notebook
 
@@ -25,6 +25,9 @@ LLM e gera as tabelas. Nenhum arquivo das Sprints anteriores é alterado.
 | 5. Tabela por versão e por métrica, score final e classificação | B |
 | 6. Comparação com a avaliação manual da Sprint 3 (mesmas respostas) | C |
 | 7. Tabelas em CSV para o relatório | D |
+
+O número "aprovação" (caso aprovado = todas as métricas dele em 1) existe para
+comparar com a avaliação manual da Sprint 3, que foi "adequado: sim ou não" por caso.
 
 ## Golden dataset — `golden_dataset.json`
 
