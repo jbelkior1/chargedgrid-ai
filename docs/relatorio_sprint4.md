@@ -114,8 +114,8 @@ Na **Sprint 1** o grupo definiu o problema, a persona, o system prompt e as perg
 
 | Nome | RM | Turma | Tarefa principal na Sprint 04 |
 |---|---|---|---|
-| Thiago de Oliveira Coelho Souza | 568783 | 1CCPO | [a preencher pelo grupo] |
-| Sammy de Moura Sato | 569182 | 1CCPO | [a preencher pelo grupo] |
-| João Pedro Pereira Teixeira | 569937 | 1CCPO | [a preencher pelo grupo] |
-| João Vitor Belchior Domingos Leite | 572478 | 1CCPO | golden dataset, pipeline de avaliação com LLM juiz, execução e relatório |
-| Gabriel Pedro de Souza | 571995 | 1CCPO | [a preencher pelo grupo] |
+| Thiago de Oliveira Coelho Souza | 568783 | 1CCPO | comparação com a avaliação manual da Sprint 3 e análise das divergências |
+| Sammy de Moura Sato | 569182 | 1CCPO | golden dataset: seleção dos casos, categorias e revisão dos gabaritos |
+| João Pedro Pereira Teixeira | 569937 | 1CCPO | definição das métricas e dos critérios do LLM juiz |
+| João Vitor Belchior Domingos Leite | 572478 | 1CCPO | pipeline de avaliação no notebook (LLM juiz) e execução sobre as duas versões |
+| Gabriel Pedro de Souza | 571995 | 1CCPO | relatório final, tabelas de resultados e limitações do pipeline |
