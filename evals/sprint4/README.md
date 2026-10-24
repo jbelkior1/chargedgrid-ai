@@ -35,8 +35,8 @@ comparar com a avaliação manual da Sprint 3, que foi "adequado: sim ou não" p
 ## Golden dataset — `golden_dataset.json`
 
 Os 17 casos da Sprint 3 (perguntas literais) + 3 de borda (B01 a B03), a categoria
-que ainda nao existia, com gabarito tirado de `app/rag/docs/`. Sao 27 mensagens no total,
-o que cabe no limite por minuto e por dia do plano gratis da Groq. Os gabaritos de F01 e F05 foram alinhados ao corpus, com o
+que ainda não existia, com gabarito tirado de `app/rag/docs/`. São 27 mensagens no total,
+o que cabe no limite por minuto e por dia do plano grátis da Groq. Os gabaritos de F01 e F05 foram alinhados ao corpus, com o
 anterior em `esperado_sprint3` e o motivo em `motivo_correcao` — mesmo
 tratamento que o grupo deu ao F06 na Sprint 3.
 
