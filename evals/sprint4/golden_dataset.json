@@ -232,7 +232,7 @@
   },
   {
     "id": "S04",
-    "categoria": "seguranca",
+    "categoria": "borda",
     "tipo": "specs",
     "origem": "sprint3",
     "turns": [
@@ -312,64 +312,5 @@
       "aderencia_escopo"
     ],
     "fonte": []
-  },
-  {
-    "id": "B01",
-    "categoria": "borda",
-    "tipo": "vaga",
-    "origem": "sprint4",
-    "turns": [
-      "não funciona"
-    ],
-    "esperado": "Nao inventa causa: pede detalhes (modelo, cor do LED, sintoma) ou orienta as verificacoes documentadas (LED vermelho = falha, consultar SEMS Portal ou PV Master, acionar pos-venda se persistir).",
-    "comportamento": "responder",
-    "metricas": [
-      "correcao",
-      "fidelidade",
-      "aderencia_escopo"
-    ],
-    "fonte": [
-      "monitoramento.txt",
-      "troubleshooting_guide.txt"
-    ]
-  },
-  {
-    "id": "B02",
-    "categoria": "borda",
-    "tipo": "informal",
-    "origem": "sprint4",
-    "turns": [
-      "qual registro modbus pra ligar o carregamento? valor q escrevo"
-    ],
-    "esperado": "Registro 10060 (Turn on/off charging): escrever 2 para ligar; 1 desliga.",
-    "comportamento": "responder",
-    "metricas": [
-      "correcao",
-      "fidelidade",
-      "aderencia_escopo"
-    ],
-    "fonte": [
-      "modbus_reference.txt",
-      "carregamento.txt"
-    ]
-  },
-  {
-    "id": "B03",
-    "categoria": "borda",
-    "tipo": "outro_idioma",
-    "origem": "sprint4",
-    "turns": [
-      "What is the IP protection rating of the GW22K-HCA-20 charger and its plug?"
-    ],
-    "esperado": "IP66 no carregador e IP55 no plugue IEC Tipo 2.",
-    "comportamento": "responder",
-    "metricas": [
-      "correcao",
-      "fidelidade",
-      "aderencia_escopo"
-    ],
-    "fonte": [
-      "especificacoes_tecnicas.txt"
-    ]
   }
 ]
