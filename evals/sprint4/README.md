@@ -1,15 +1,16 @@
 # evals/sprint4 — avaliação sistemática do agente (Sprint 04)
 
-Tudo está em **`Sprint4_ChargeGrid_Avaliacao.ipynb`** (Google Colab). Um LLM
-juiz (`gpt-4o-mini`) dá nota, por critério, às respostas das duas versões do
+Tudo está em **`Sprint4_ChargeGrid_Avaliacao.ipynb`** (Google Colab, já executado,
+com as saídas). Um LLM juiz (`gemini-3.5-flash-lite`) dá nota, por critério, às respostas das duas versões do
 chatbot para o golden dataset, e o resultado é comparado com a avaliação manual
 da Sprint 3.
 
 ## Como rodar
 
 1. Abra o notebook no Colab.
-2. Cadastre `OPENAI_API_KEY` nos Secrets do Colab, com acesso ao notebook.
-3. **Executar tudo.** No fim, ele baixa `resultados_sprint4.zip`.
+2. Cadastre `GOOGLE_API_KEY` nos Secrets do Colab, com acesso ao notebook
+   (fora do Colab, a chave fica no `.env`).
+3. **Executar tudo.** Os resultados vão para `evals/sprint4/resultados/`.
 
 ## O que tem no notebook
 
@@ -17,7 +18,7 @@ da Sprint 3.
 |---|---|
 | 1. Golden dataset — 17 casos em funcionalidade, segurança, escopo e borda | A |
 | 2. Versões avaliadas — Sprint 2 (`gpt-oss-20b`) e Sprint 3 (`gemini-3.6-flash`) | B |
-| 3. LLM as a judge — `gpt-4o-mini`, temperatura 0, sem saber qual versão respondeu | A |
+| 3. LLM as a judge — `gemini-3.5-flash-lite`, temperatura 0, sem saber qual versão respondeu | A |
 | 4. Tabela por versão e por métrica, score final e classificação | B |
 | 5. Comparação com a avaliação manual da Sprint 3 | C |
 | 6. Tabelas em CSV para o relatório | D |
@@ -44,3 +45,5 @@ F06 na Sprint 3.
 
 Nota 0 ou 1 por métrica. Aprovado = todas as métricas do caso em 1 (é o que se
 compara com o "adequado" da avaliação manual). Score final = média das quatro taxas.
+
+Relatório final: `docs/relatorio_sprint4.pdf` (fonte em `docs/relatorio_sprint4.md`).
