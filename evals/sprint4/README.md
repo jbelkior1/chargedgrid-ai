@@ -9,8 +9,7 @@ LLM e gera as tabelas. Nenhum arquivo das Sprints anteriores é alterado.
 
 1. Abra o notebook no Colab.
 2. Cadastre nos Secrets do Colab, com acesso ao notebook: `GROQ_API_KEY`
-   (versão Sprint 2), `GOOGLE_API_KEY` (versão Sprint 3) e `OPENAI_API_KEY`
-   (juiz).
+   (as duas versões) e `OPENAI_API_KEY` (juiz).
 3. **Executar tudo.** No fim, o notebook baixa `resultados_sprint4.zip` com o
    golden dataset, as respostas, os julgamentos e as tabelas. Se a cota da Groq
    acabar no meio, rodar a célula de novo continua dos casos que faltam.
@@ -20,11 +19,15 @@ LLM e gera as tabelas. Nenhum arquivo das Sprints anteriores é alterado.
 | Seção | Item da rubrica |
 |---|---|
 | 2. Golden dataset — 34 casos em funcionalidade, segurança, escopo e borda | A |
-| 3. Respostas das versões Sprint 2 (`gpt-oss-20b`) e Sprint 3 (`gemini-3.6-flash`) | B |
+| 3. Respostas das versões Sprint 2 (`gpt-oss-20b`) e Sprint 3 (`qwen3.8-27b`), ambas na Groq | B |
 | 4. LLM as a judge — `gpt-4o-mini`, temperatura 0, sem saber qual versão respondeu | A |
 | 5. Tabela por versão e por métrica, score final e classificação | B |
 | 6. Comparação com a avaliação manual da Sprint 3 (mesmas respostas) | C |
 | 7. Tabelas em CSV para o relatório | D |
+
+A versão Sprint 3 roda com o Qwen, e não com o `gemini-3.6-flash` (modelo final
+da Sprint 3), porque o plano grátis do Google permite só 20 chamadas por dia e o
+agente faz duas por mensagem. O Qwen também foi medido e avaliado à mão na Sprint 3.
 
 O número "aprovação" (caso aprovado = todas as métricas dele em 1) existe para
 comparar com a avaliação manual da Sprint 3, que foi "adequado: sim ou não" por caso.
