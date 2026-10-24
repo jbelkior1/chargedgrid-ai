@@ -2,8 +2,10 @@
 
 Assistente técnico para carregadores de veículos elétricos GoodWe HCA-G2.
 
-**EV Challenge 2026 — GoodWe** · Sprint 03: Agentes de IA e Evolução Conversacional
-Turma 1CCPO · Branch de entrega: `sprint-03`
+**EV Challenge 2026 — GoodWe** · Sprint 04: Avaliação sistemática do agente
+Turma 1CCPO · Branch de entrega: `sprint-04`
+
+> **Sprint 04.** Pipeline de avaliação com golden dataset e LLM juiz, comparando as versões da Sprint 2 e da Sprint 3: [`evals/sprint4/`](evals/sprint4/README.md) e relatório em [`docs/relatorio_sprint4.pdf`](docs/relatorio_sprint4.pdf). O restante deste README descreve a arquitetura entregue na Sprint 03.
 
 O sistema responde dúvidas de operação, instalação, configuração Modbus e
 diagnóstico de falhas dos modelos GW7K, GW11K e GW22K, a partir de uma base

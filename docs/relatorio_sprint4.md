@@ -62,7 +62,7 @@ As respostas avaliadas são as que o grupo gerou na Sprint 3 rodando estes mesmo
 
 ## 4. Classificação e justificativa
 
-**A versão Sprint 3 teve o melhor desempenho:** score final de 100,0% contra 85,8% da Sprint 2. A diferença vem de duas métricas. Em **correção** (+44,4 pontos), a Sprint 2 falhou em 4 dos 9 casos: F01 e F04 tiveram resposta vazia e M01 e M03 responderam "Essa informação não está documentada" em vez de usar o que o usuário tinha dito na conversa. Em **recusa correta** (+12,5 pontos), a Sprint 2 recusou o pedido de ligação elétrica perigosa (S07) sem encaminhar a um eletricista habilitado. Nas outras duas métricas as versões empataram em 100%.
+**A versão Sprint 3 teve o melhor desempenho:** score final de 100,0% contra 85,8% da Sprint 2. A diferença vem de duas métricas. Em **correção** (+44,4 pontos), a Sprint 2 falhou em 4 dos 9 casos: F01 e F04 tiveram resposta vazia (o modelo usado na Sprint 2 gastou todo o limite de tokens no raciocínio interno; ver Limitações) e M01 e M03 responderam "Essa informação não está documentada" em vez de usar o que o usuário tinha dito na conversa. Em **recusa correta** (+12,5 pontos), a Sprint 2 recusou o pedido de ligação elétrica perigosa (S07) sem encaminhar a um eletricista habilitado. Nas outras duas métricas as versões empataram em 100%.
 
 ---
 
@@ -96,17 +96,23 @@ Há ainda uma inconsistência do próprio juiz: no S07, com a mesma resposta "n�
 
 **Leniência e instabilidade em recusas.** Como mostram S05, S06, E01 e S07, o juiz aceitou "não está documentado" como recusa de forma inconsistente. Por isso a aprovação da Sprint 2 pelo pipeline (70,6%) fica acima da manual (47,1%). Um critério de recusa que exija explicitamente o encaminhamento quando o gabarito o pede tornaria a nota mais confiável.
 
+**Leniência em correção.** O juiz aprovou o F01 da Sprint 3 sem a menção ao LED azul, que faz parte do gabarito. Em gabaritos com vários fatos, ele tende a aprovar quando a maior parte deles aparece.
+
+**Reprodutibilidade do juiz.** Rodamos o pipeline uma segunda vez, a partir de um clone limpo do repositório. Das 82 notas, 81 se repetiram; só a recusa correta do S07 na Sprint 2 mudou (de 0 para 1), o que levaria o score da Sprint 2 de 85,8% para 88,9% e a aprovação de 70,6% para 76,5%. A Sprint 3 ficou em 100% e a classificação não muda. As tabelas deste relatório são da primeira execução, salva em `evals/sprint4/resultados/`. Mesmo com temperatura 0, o juiz não é totalmente determinístico nos casos de fronteira.
+
+**Troca de modelo na versão Sprint 2.** O modelo original da Sprint 2 (`llama-3.3-70b-versatile`) saiu do catálogo da Groq, e as respostas foram geradas com `openai/gpt-oss-20b`, como registrado em `evals/results/baseline_sprint2.json`. As respostas vazias de F01 e F04 vêm do limite fixo de 1.200 tokens de saída, gasto inteiro no raciocínio interno desse modelo. Parte da diferença em correção é, portanto, efeito do modelo substituto, e não só da arquitetura.
+
 **Cobertura do golden dataset.** São 17 casos, com só 1 de escopo e 1 de borda. Com poucos casos por categoria, um único erro muda a taxa em vários pontos.
 
 **Fidelidade e resposta vazia.** A fidelidade não penaliza resposta vazia (não há afirmação para contradizer). F01 e F04 da Sprint 2 ficaram com fidelidade 1; essa falha aparece na correção.
 
-**Custo e execução.** O juiz é um modelo leve (`flash-lite`), escolhido pelo limite do plano gratuito, e cada caso foi julgado uma única vez. As respostas avaliadas são as gravadas na Sprint 3; não rodamos as versões de novo porque o plano gratuito do Gemini limita o modelo da Sprint 3 a 20 chamadas por dia.
+**Custo e execução.** O juiz é um modelo leve (`flash-lite`), escolhido pelo limite do plano gratuito, e cada execução julga cada caso uma vez. As respostas avaliadas são as gravadas na Sprint 3; não rodamos as versões de novo porque o plano gratuito do Gemini limita o modelo da Sprint 3 a 20 chamadas por dia.
 
 ---
 
 ## 7. Evolução do projeto ao longo das sprints
 
-Na **Sprint 1** o grupo definiu o problema, a persona, o system prompt e as perguntas de teste. Na **Sprint 2** o chatbot passou a responder com RAG e memória manual, e a avaliação manual da Sprint 3 deu a ele 47,1% de acerto. Na **Sprint 3** o núcleo foi reconstruído com LangGraph, roteador, guardrails e memória gerenciada pelo framework, e a avaliação manual subiu para 100%. Nesta **Sprint 4**, a avaliação automática confirma essa evolução com números reprodutíveis: score final de 85,8% para 100,0%, com ganho de 44,4 pontos em correção e 12,5 em recusa correta, e concordância de 88,2% com a avaliação manual.
+Na **Sprint 1** o grupo definiu o problema, a persona, o system prompt e as perguntas de teste. Na **Sprint 2** o chatbot passou a responder com RAG e memória manual, e a avaliação manual da Sprint 3 deu a ele 47,1% de acerto. Na **Sprint 3** o núcleo foi reconstruído com LangGraph, roteador, guardrails e memória gerenciada pelo framework, e a avaliação manual subiu para 100%. Nesta **Sprint 4**, a avaliação automática confirma essa evolução com números calculados automaticamente: score final de 85,8% para 100,0%, com ganho de 44,4 pontos em correção e 12,5 em recusa correta, e concordância de 88,2% com a avaliação manual.
 
 ---
 
