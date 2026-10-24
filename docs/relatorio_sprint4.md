@@ -1,6 +1,6 @@
 # Relatório Final — Sprint 04: avaliação sistemática do agente
 
-ChargeGrid AI · EV Challenge GoodWe · Prompt and Artificial Intelligence · Turma 1CCPO · Repositório: `github.com/Thiagoolivs/chargedgrid-ai` (branch `sprint-04`)
+ChargeGrid AI · EV Challenge GoodWe · Prompt and Artificial Intelligence · Turma 1CCPO · Repositório: `github.com/jbelkior1/chargedgrid-ai` (branch `sprint-04`)
 
 Na Sprint 3 as respostas do chatbot foram avaliadas à mão. Nesta sprint a avaliação passou a ser automática: um LLM juiz dá nota, por critério, às respostas de duas versões do chatbot para um golden dataset, e o resultado é comparado com a avaliação manual. Todo o pipeline está em `evals/sprint4/Sprint4_ChargeGrid_Avaliacao.ipynb` e todos os números deste relatório saem de `evals/sprint4/resultados/`.
 
