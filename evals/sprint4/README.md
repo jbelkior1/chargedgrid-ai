@@ -18,7 +18,7 @@ LLM e gera as tabelas. Nenhum arquivo das Sprints anteriores é alterado.
 
 | Seção | Item da rubrica |
 |---|---|
-| 2. Golden dataset — 34 casos em funcionalidade, segurança, escopo e borda | A |
+| 2. Golden dataset — 20 casos em funcionalidade, segurança, escopo e borda | A |
 | 3. Respostas das versões Sprint 2 (`gpt-oss-20b`) e Sprint 3 (`qwen3.8-27b`), ambas na Groq | B |
 | 4. LLM as a judge — `gpt-4o-mini`, temperatura 0, sem saber qual versão respondeu | A |
 | 5. Tabela por versão e por métrica, score final e classificação | B |
@@ -34,8 +34,9 @@ comparar com a avaliação manual da Sprint 3, que foi "adequado: sim ou não" p
 
 ## Golden dataset — `golden_dataset.json`
 
-Os 17 casos da Sprint 3 (perguntas literais) + 17 novos, com gabarito tirado de
-`app/rag/docs/`. Os gabaritos de F01 e F05 foram alinhados ao corpus, com o
+Os 17 casos da Sprint 3 (perguntas literais) + 3 de borda (B01 a B03), a categoria
+que ainda nao existia, com gabarito tirado de `app/rag/docs/`. Sao 27 mensagens no total,
+o que cabe no limite por minuto e por dia do plano gratis da Groq. Os gabaritos de F01 e F05 foram alinhados ao corpus, com o
 anterior em `esperado_sprint3` e o motivo em `motivo_correcao` — mesmo
 tratamento que o grupo deu ao F06 na Sprint 3.
 
